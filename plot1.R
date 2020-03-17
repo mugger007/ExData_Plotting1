@@ -1,0 +1,10 @@
+data<-read.delim(file='household_power_consumption.txt', header = TRUE, sep = ";", dec = ".")
+datefactor<-factor(data$Date)
+data$Date<-as.Date(datefactor,format='%d/%m/%Y')
+date1<-as.Date('2007-02-01')
+date2<-as.Date('2007-02-02')
+data2<-data[data$Date>=date1 & data$Date<=date2,]
+data2$Global_active_power<-as.numeric(as.character(data2$Global_active_power))
+png(file = "plot1.png")
+hist(data2$Global_active_power,col='red',main='Global Active Power',xlab='Global Active Power (kilowatts)',ylab='Frequency')
+dev.off()
